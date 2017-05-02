@@ -1,7 +1,6 @@
 'use strict';
-var output;
+var quill, editor, output;
 var saved = true;
-var quill;
 document.addEventListener("DOMContentLoaded", function () {
     var toolbarOptions = ['bold', 'italic', 'link'];
     quill = new Quill('#desc', {
@@ -11,22 +10,22 @@ document.addEventListener("DOMContentLoaded", function () {
     });
     var draft = localStorage.draft;
     if (draft != undefined) {
-        quill.setText(draft);
+        quill.setContents(JSON.parse(draft));
     }
     quill.focus();
     document.getElementsByClassName('ql-bold').item(0).className += ' fa fa-bold';
     document.getElementsByClassName('ql-italic').item(0).className += ' fa fa-italic';
     document.getElementsByClassName('ql-link').item(0).className += ' fa fa-link';
-    var editor = document.getElementsByClassName('ql-editor');
+    editor = document.getElementsByClassName('ql-editor').item(0);
     output = document.getElementById('out');
-    output.innerText = editor.item(0).innerHTML;
+    convert();
     quill.on('text-change', function () {
         saved = false;
-        output.innerText = editor.item(0).innerHTML;
+        convert();
     });
     new Clipboard('.fa-copy', {
         text: function () {
-            return output.innerText;
+            return output.value;
         }
     })
     if (storageAvailable) {
@@ -34,9 +33,13 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 })
 
+function convert() {
+    output.value = editor.innerHTML.replace(/target="_blank"/g, '').replace(/<p><br><\/p>/g, '<br>').replace(/<p[^>]*>((?:(?!<\/p>).)*)<\/p>/g, '$1\n<br>');
+}
+
 function autosave() {
     if (!saved) {
-        localStorage.draft = quill.getText();
+        localStorage.draft = JSON.stringify(quill.getContents());
         saved = true;
     }
     setTimeout(function () {
