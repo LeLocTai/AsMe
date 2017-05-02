@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (draft != undefined) {
         quill.setText(draft);
     }
+    quill.focus();
     document.getElementsByClassName('ql-bold').item(0).className += ' fa fa-bold';
     document.getElementsByClassName('ql-italic').item(0).className += ' fa fa-italic';
     document.getElementsByClassName('ql-link').item(0).className += ' fa fa-link';
