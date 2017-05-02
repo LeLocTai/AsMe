@@ -1,0 +1,78 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin: 1em auto;
+}
+
+#editor-container {
+    position: relative;
+    box-sizing: border-box;
+    height: 389px;
+    width: 280px;
+    margin: auto;
+    background-color: #222b37;
+    border: none;
+    word-break: break-word;
+}
+
+#desc {}
+
+.ql-editor {
+    font-family: 'Roboto', sans-serif;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 20px 15px 20px 20px;
+}
+
+.ql-editor a {
+    color: #fff;
+}
+
+.ql-editor::-webkit-scrollbar {
+    -webkit-appearance: none;
+    width: 8px;
+}
+
+.ql-editor::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.ql-editor::-webkit-scrollbar-track {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.ql-toolbar {
+    display: inline-block;
+    position: absolute;
+    left: -2em;
+    top: 150px;
+    width: 2em;
+}
+
+.ql-formats>* {
+    display: block;
+    width: 2em;
+    height: 2em;
+}
+
+pre {
+    display: block;
+    width: 32em;
+    margin: auto;
+    padding: 1em;
+}
+
+pre>button {
+    float: right;
+}
+
+#out {
+    display: block;
+    padding: 1em;
+    word-wrap: break-word;
+    white-space: normal;
+}
