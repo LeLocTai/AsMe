@@ -1,5 +1,10 @@
 body {
     font-family: 'Roboto', sans-serif;
+    background: #fff;
+}
+
+a {
+    color: dodgerblue;
 }
 
 h1 {
@@ -7,80 +12,98 @@ h1 {
     margin: 1em auto;
 }
 
-#editor-container {
+#container {
+    display: flex;
+    justify-content: center;
+}
+
+#editor,
+#output {
+    resize: none;
+    outline: none;
+    height: 383px;
+    width: 350px;
+    font: inherit;
+}
+
+#editor {}
+
+#copy {
+    display: block;
+    margin: 16px auto;
+    font-size: 18px;
+    padding: 0.5em 1em;
+    border-radius: 8px;
+    border: none;
+    background: #ddd;
+}
+
+#copy:active {
+    outline: none;
+    background: #bbb;
+}
+
+.fa-copy {
+    position: absolute;
+    right: 0;
+}
+
+#preview {
+    display: inline-block;
     position: relative;
     box-sizing: border-box;
     height: 389px;
     width: 280px;
-    margin: auto;
-    background-color: #222b37;
+    min-width: 280px;
     border: none;
-    word-break: break-word;
-}
-
-#desc {}
-
-.ql-editor {
-    font-family: 'Roboto', sans-serif;
+    background-color: #222b37;
     color: #fff;
+    font-family: inherit;
     font-size: 12px;
     line-height: 16px;
     padding: 20px 15px 20px 20px;
+    word-break: break-word;
+    overflow-y: scroll;
 }
 
-#editor-container a {
-    color: #fff;
-}
-
-.ql-editor::-webkit-scrollbar {
+#preview::-webkit-scrollbar {
     -webkit-appearance: none;
     width: 8px;
 }
 
-.ql-editor::-webkit-scrollbar-thumb {
+#preview::-webkit-scrollbar-thumb {
     background-color: rgba(255, 255, 255, 0.5);
 }
 
-.ql-editor::-webkit-scrollbar-track {
+#preview::-webkit-scrollbar-track {
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-.ql-toolbar {
-    display: inline-block;
-    position: absolute;
-    left: -2em;
-    top: 150px;
-    width: 2em;
+#preview a {
+    color: white;
 }
 
-.ql-formats>* {
-    display: block;
-    width: 32px;
-    height: 32px;
-}
-
-#result {
-    position: relative;
-    display: block;
+article {
+    background: #f5f5f5;
+    border-radius: 8px;
+    padding: 16px;
+    margin: 32px auto;
     width: 480px;
     max-width: 100%;
-    margin: 48px auto;
-    padding: 0;
-    line-height: 32px;
 }
 
-#result>button {
-    float: right;
-    width: 32px;
-    height: 32px;
+article h3 {
+    margin: 4px;
 }
 
-#out {
-    display: block;
-    width: calc(100% - 6px);
-    margin: 8px 0;
-    word-wrap: break-word;
-    white-space: normal;
-    resize: none;
-    outline: none;
+article table {
+    width: 100%;
+}
+
+footer {
+    text-align: center
+}
+
+.relative {
+    position: relative;
 }

@@ -1,45 +1,37 @@
 'use strict';
-var quill, editor, output;
+var editor, preview;
 var saved = true;
 document.addEventListener("DOMContentLoaded", function () {
-    var toolbarOptions = ['bold', 'italic', 'link'];
-    quill = new Quill('#desc', {
-        modules: {
-            toolbar: toolbarOptions
-        }
-    });
-    var draft = localStorage.draft;
-    if (draft != undefined) {
-        quill.setContents(JSON.parse(draft));
-    }
-    quill.focus();
-    document.getElementsByClassName('ql-bold').item(0).className += ' fa fa-bold';
-    document.getElementsByClassName('ql-italic').item(0).className += ' fa fa-italic';
-    document.getElementsByClassName('ql-link').item(0).className += ' fa fa-link';
-    editor = document.getElementsByClassName('ql-editor').item(0);
-    output = document.getElementById('out');
-    convert();
-    quill.on('text-change', function () {
-        saved = false;
-        convert();
-    });
-    new Clipboard('.fa-copy', {
-        text: function () {
-            return output.value;
-        }
-    })
+    editor = document.getElementById('editor');
+    preview = document.getElementById('preview');
+    editor.onchange = editor.onkeyup = convert;
     if (storageAvailable) {
+        editor.value = localStorage.draft;
+        convert();
         autosave();
     }
+    new Clipboard('#copy', {
+        text: function () {
+            return preview.innerHTML;
+        }
+    })
 })
 
 function convert() {
-    output.value = editor.innerHTML.replace(/target="_blank"/g, '').replace(/<p><br><\/p>/g, '<br>').replace(/<p[^>]*>((?:(?!<\/p>).)*)<\/p>/g, '$1\n<br>');
+    saved = false;
+    var out = editor.value;
+    out = out.replace(/(\*{3})(.*?)\1/g, '<strong><em>$2</em>/strong>');
+    out = out.replace(/(\*{3})(.+?)\*{2}(.+?)\*/g, '<em><strong>$2</strong>$3</em>');
+    out = out.replace(/(\*{2})(.*?)\1/g, '<strong>$2</strong>');
+    out = out.replace(/(\*)(.*?)\1/g, '<em>$2</em>');
+    out = out.replace(/\[([^\[]+)\]\(([^\)]+)\)/g, '<a href=\'$2\'>$1</a>');
+    out = out.replace(/\n/g, '<br>');
+    preview.innerHTML = out;
 }
 
 function autosave() {
     if (!saved) {
-        localStorage.draft = JSON.stringify(quill.getContents());
+        localStorage.draft = editor.value;
         saved = true;
     }
     setTimeout(function () {
