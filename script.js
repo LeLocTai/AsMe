@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
     preview = document.getElementById('preview');
     editor.onchange = editor.onkeyup = convert;
     if (storageAvailable) {
-        editor.value = localStorage.draft;
+        editor.value = localStorage.draft || '';
         convert();
         autosave();
     }
