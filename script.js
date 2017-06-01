@@ -21,7 +21,7 @@ function convert() {
     saved = false;
     var out = editor.value;
     out = out.replace(/( (?= ))/g, '&nbsp');
-    out = out.replace(/(\*{3})(.*?)\1/g, '<strong><em>$2</em>/strong>');
+    out = out.replace(/(\*{3})(.*?)\1/g, '<strong><em>$2</em></strong>');
     out = out.replace(/(\*{3})(.+?)\*{2}(.+?)\*/g, '<em><strong>$2</strong>$3</em>');
     out = out.replace(/(\*{2})(.*?)\1/g, '<strong>$2</strong>');
     out = out.replace(/(\*)(.*?)\1/g, '<em>$2</em>');
