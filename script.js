@@ -26,7 +26,7 @@ function convert() {
     out = out.replace(/(\*{2})(.*?)\1/g, '<strong>$2</strong>');
     out = out.replace(/(\*)(.*?)\1/g, '<em>$2</em>');
     out = out.replace(/\[([^\[]+)\]\(([^\)]+)\)/g, '<a href=\'$2\'>$1</a>');
-    out = out.replace(/\n/g, '<br>');
+    out = out.replace(/\n/g, '\n<br>');
     preview.innerHTML = out;
 }
 
